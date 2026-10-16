@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLAYER 1 - Retro Pixel Portfolio</title>
-    <!-- Bootstrap 5 CSS -->
+    <title>Dev Portfolio</title>
+   
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- FontAwesome Icons -->
+   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Retro Pixel Fonts -->
+  
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
 
     <style>
-        /* Modern Clean Pixel Palette & Font Setup */
+      
         :root {
             --pixel-bg: #0d0e15;
             --pixel-panel: #161824;
@@ -46,7 +46,7 @@
             font-family: 'Press Start 2P', cursive;
         }
 
-        /* Authentic 8-bit Crisp Pixel Panel Box */
+       
         .pixel-box {
             background: var(--pixel-panel);
             border: 4px solid #000;
@@ -67,7 +67,7 @@
                 4px 4px 0px 0px #000;
         }
 
-        /* Interactive Pixel Button Styling */
+       
         .pixel-btn {
             font-family: 'Press Start 2P', cursive;
             font-size: 0.7rem;
@@ -114,7 +114,7 @@
             box-shadow: inset -3px -3px 0px #851821, inset 3px 3px 0px #f08189, 3px 3px 0px #000;
         }
 
-        /* Retro Progress Bars */
+       
         .pixel-progress-frame {
             background: #000;
             border: 2px solid var(--pixel-border);
@@ -126,7 +126,7 @@
             transition: width 0.3s ease;
         }
 
-        /* CRT Overlay Filter Toggle */
+      
         .crt-overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -138,12 +138,11 @@
         }
         .crt-overlay.disabled { display: none; }
 
-        /* Custom Scrollbar */
+     
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: var(--pixel-bg); }
         ::-webkit-scrollbar-thumb { background: var(--pixel-yellow); border: 2px solid #000; }
 
-        /* Input Controls Retro Style */
         .pixel-input {
             background-color: #090a0f !important;
             border: 3px solid #000 !important;
@@ -166,31 +165,66 @@
             border-radius: 0;
             box-shadow: 2px 2px 0px #000;
         }
+
+      
+        .avatar-swap {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            cursor: pointer;
+            overflow: hidden;
+            background: #000;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .avatar-swap .avatar-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: contrast(115%);
+            transition: opacity 0.25s steps(4), transform 0.25s steps(4);
+        }
+        .avatar-swap .avatar-alt {
+            opacity: 0;
+            transform: scale(1.08);
+        }
+       
+        .avatar-swap:hover .avatar-main,
+        .avatar-swap.swapped .avatar-main {
+            opacity: 0;
+            transform: scale(0.92);
+        }
+        .avatar-swap:hover .avatar-alt,
+        .avatar-swap.swapped .avatar-alt {
+            opacity: 1;
+            transform: scale(1);
+        }
     </style>
 </head>
 <body>
 
-    <!-- CRT SCANLINE LAYER -->
+   
     <div id="crtOverlay" class="crt-overlay"></div>
 
-    <!-- HUD NAVBAR / AUDIO CONTROL BAR -->
+    
     <header class="sticky-top bg-black border-bottom border-3 border-dark py-2 px-3 z-3">
         <div class="container-xl flex-wrap d-flex align-items-center justify-content-between gap-2">
             
-            <!-- Player Stats HUD Badge -->
+          
             <div class="d-flex align-items-center gap-3">
                 <span class="font-pixel text-warning" style="font-size: 0.75rem;">
-                    <i class="fa-solid fa-gamepad me-1"></i> 1P
+                    <i class="fa-solid fa-gamepad me-1"></i> ANA MARCELO
                 </span>
                 <span class="font-pixel text-white" style="font-size: 0.65rem;">
                     LVL.<span id="hudLevel">99</span>
                 </span>
                 <span class="font-pixel text-info d-none d-sm-inline" style="font-size: 0.65rem;">
-                    EXP:<span id="hudExp">9999</span>
+                    EXP:<span id="hudExp">1000</span>
                 </span>
             </div>
 
-            <!-- Audio & CRT Controls -->
+            
             <div class="d-flex align-items-center gap-2 flex-wrap">
                 <button id="bgmBtn" onclick="toggleMusic()" class="pixel-btn">
                     <i id="bgmIcon" class="fa-solid fa-music text-warning"></i>
@@ -216,39 +250,45 @@
 
     <main class="container-xl py-4 py-md-5">
 
-        <!-- 1. HERO / CENTERED PROFILE CARD -->
+        
         <section class="row justify-content-center mb-5">
             <div class="col-12 col-lg-9">
                 <div class="pixel-box-gold text-center">
                     
                     <div class="font-pixel text-warning mb-3" style="font-size: 0.65rem; letter-spacing: 1px;">
-                        --- CHARACTER STATUS HUD ---
+                        
                     </div>
 
-                    <!-- Centered Avatar Box -->
+                    
                     <div class="d-inline-block position-relative mb-3">
                         <div class="p-1 bg-black border border-3 border-dark shadow-lg">
-                            <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=300&q=80" 
-                                 alt="Pixel Developer Avatar" 
-                                 class="img-fluid" 
-                                 style="width: 140px; height: 140px; object-fit: cover; filter: contrast(115%);"
-                                 onerror="this.src='https://placehold.co/140x140/161824/f4b41b?text=DEV+P1'">
+                            <div class="avatar-swap" id="avatarSwap" title="">
+                               
+                                <img class="avatar-img avatar-main"
+                                     src="C:\Users\Leem\portfolio\portfolio\IMG_8012.jpg"
+                                     alt="Pixel Developer Avatar">
+                               
+                                <img class="avatar-img avatar-alt"
+                                     id="avatarAlt"
+                                     src="C:\Users\Leem\portfolio\portfolio\IMG_8014.jpg"
+                                     alt="Pixel Developer Avatar Alt">
+                            </div>
                         </div>
                         <span class="position-absolute bottom-0 start-50 translate-middle-x badge bg-success border border-2 border-dark font-pixel" style="font-size: 0.6rem;">
                             LVL <span id="heroLevel">99</span>
                         </span>
                     </div>
 
-                    <h1 class="font-pixel text-warning mb-1" style="font-size: 1.5rem;">ALEX_DEV</h1>
-                    <p class="font-pixel text-info mb-3" style="font-size: 0.75rem;">[ FULL-STACK ARCHMAGE ]</p>
+                    <h1 class="font-pixel text-warning mb-1" style="font-size: 1.5rem;">Ana Marcelo</h1>
+                    <p class="font-pixel text-info mb-3" style="font-size: 0.75rem;">[ Web & Mobile Developer/Game Designer ]</p>
                     
                     <p class="mx-auto text-light mb-4" style="max-width: 580px; font-size: 1.35rem;">
-                        Passionate software developer crafting high-performance web applications, retro games, and modern full-stack systems.
+                        I'm Passionate in crafting high-performance web & mobile applications, games, and modern full-stack systems.
                     </p>
 
-                    <!-- HP / MP / EXP Bars -->
+                  
                     <div class="mx-auto text-start mb-4" style="max-width: 460px;">
-                        <!-- HP -->
+                       
                         <div class="d-flex justify-content-between font-pixel text-danger mb-1" style="font-size: 0.6rem;">
                             <span>HP (STAMINA)</span>
                             <span>999/999</span>
@@ -257,7 +297,7 @@
                             <div class="pixel-progress-bar bg-danger" style="width: 100%;"></div>
                         </div>
 
-                        <!-- MP -->
+                       
                         <div class="d-flex justify-content-between font-pixel text-info mb-1" style="font-size: 0.6rem;">
                             <span>MP (COFFEE)</span>
                             <span>500/500</span>
@@ -266,26 +306,26 @@
                             <div class="pixel-progress-bar bg-info" style="width: 100%;"></div>
                         </div>
 
-                        <!-- EXP -->
+                       
                         <div class="d-flex justify-content-between font-pixel text-warning mb-1" style="font-size: 0.6rem;">
                             <span>EXP (NEXT LEVEL)</span>
-                            <span id="expText">8500/10000</span>
+                            <span id="expText">1000/100000</span>
                         </div>
                         <div class="pixel-progress-frame">
-                            <div id="expBar" class="pixel-progress-bar bg-warning" style="width: 85%;"></div>
+                            <div id="expBar" class="pixel-progress-bar bg-warning" style="width: 10%;"></div>
                         </div>
                     </div>
 
-                    <!-- Hero Quick Action Buttons -->
+                   
                     <div class="d-flex flex-wrap justify-content-center gap-2">
                         <button onclick="triggerLevelUp()" class="pixel-btn pixel-btn-yellow">
                             <i class="fa-solid fa-angles-up"></i> LEVEL UP!
                         </button>
                         <a href="#projects" onclick="playSFX('click')" class="pixel-btn pixel-btn-green">
-                            <i class="fa-solid fa-scroll"></i> QUEST LOG
+                            <i class="fa-solid fa-scroll"></i> PROJECT LOG
                         </a>
                         <button onclick="downloadResume()" class="pixel-btn">
-                            <i class="fa-solid fa-file-arrow-down text-warning"></i> RESUME SCROLL
+                            <i class="fa-solid fa-file-arrow-down text-warning"></i> MY RESUME 
                         </button>
                     </div>
 
@@ -293,14 +333,14 @@
             </div>
         </section>
 
-        <!-- 2. STATS & TECH ATTRIBUTES -->
+       
         <section class="mb-5">
             <div class="border-bottom border-3 border-dark pb-2 mb-4 d-flex justify-content-between align-items-end">
                 <div>
                     <h2 class="font-pixel text-warning m-0" style="font-size: 1rem;">
-                        <i class="fa-solid fa-shield-halved text-info me-2"></i>STAT ATTRIBUTES
+                        <i class="fa-solid fa-shield-halved text-info me-2"></i>TECH ATTRIBUTES
                     </h2>
-                    <small class="text-secondary">CORE CHARACTER CHARACTERISTICS</small>
+                    <small class="text-secondary">CORE CHARACTERISTICS</small>
                 </div>
                 <button onclick="allocatePoints()" class="pixel-btn pixel-btn-yellow">
                     + STAT PT
@@ -308,56 +348,56 @@
             </div>
 
             <div class="row g-3">
-                <!-- STR - Frontend -->
+                
                 <div class="col-12 col-md-6 col-lg-3">
                     <div class="pixel-box h-100">
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="font-pixel text-danger" style="font-size: 0.75rem;">STR (FRONTEND)</span>
+                            <span class="font-pixel text-danger" style="font-size: 0.75rem;">Frontend</span>
                             <span class="badge-pixel bg-danger text-white" id="statSTR">LVL 95</span>
                         </div>
-                        <p class="text-secondary small mb-2">HTML, CSS, JS, React, Bootstrap</p>
+                        <p class="text-secondary small mb-2">HTML, CSS, JS, React, Bootstrap, Java, PHP, Dart/Flutter</p>
                         <div class="pixel-progress-frame">
                             <div class="pixel-progress-bar bg-danger" style="width: 95%;"></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- DEX - Backend -->
+                
                 <div class="col-12 col-md-6 col-lg-3">
                     <div class="pixel-box h-100">
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="font-pixel text-success" style="font-size: 0.75rem;">DEX (BACKEND)</span>
+                            <span class="font-pixel text-success" style="font-size: 0.75rem;">Backend</span>
                             <span class="badge-pixel bg-success text-black" id="statDEX">LVL 88</span>
                         </div>
-                        <p class="text-secondary small mb-2">Node.js, Express, Python, Luau</p>
+                        <p class="text-secondary small mb-2">Node.js,PHP Laravel, Python, Luau</p>
                         <div class="pixel-progress-frame">
                             <div class="pixel-progress-bar bg-success" style="width: 88%;"></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- INT - Database & Systems -->
+              
                 <div class="col-12 col-md-6 col-lg-3">
                     <div class="pixel-box h-100">
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="font-pixel text-info" style="font-size: 0.75rem;">INT (SYSTEMS)</span>
+                            <span class="font-pixel text-info" style="font-size: 0.75rem;">Database & Systems</span>
                             <span class="badge-pixel bg-info text-black" id="statINT">LVL 90</span>
                         </div>
-                        <p class="text-secondary small mb-2">PostgreSQL, MongoDB, REST APIs</p>
+                        <p class="text-secondary small mb-2">mySQL, MongoDB, REST APIs, Firebase</p>
                         <div class="pixel-progress-frame">
                             <div class="pixel-progress-bar bg-info" style="width: 90%;"></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- LUK - Tools & DevOps -->
+               
                 <div class="col-12 col-md-6 col-lg-3">
                     <div class="pixel-box h-100">
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="font-pixel text-warning" style="font-size: 0.75rem;">LUK (TOOLS)</span>
+                            <span class="font-pixel text-warning" style="font-size: 0.75rem;">Tools & DevOps</span>
                             <span class="badge-pixel bg-warning text-black" id="statLUK">LVL 85</span>
                         </div>
-                        <p class="text-secondary small mb-2">Git, Docker, Linux, CI/CD</p>
+                        <p class="text-secondary small mb-2">Git, Blender, Figma, Android Studio, Firebase, mySQL</p>
                         <div class="pixel-progress-frame">
                             <div class="pixel-progress-bar bg-warning" style="width: 85%;"></div>
                         </div>
@@ -366,13 +406,13 @@
             </div>
         </section>
 
-        <!-- 3. SKILLS & LEARNED ABILITIES -->
+        
         <section class="mb-5">
             <div class="border-bottom border-3 border-dark pb-2 mb-4">
                 <h2 class="font-pixel text-warning m-0" style="font-size: 1rem;">
                     <i class="fa-solid fa-wand-magic-sparkles text-warning me-2"></i>LEARNED ABILITIES
                 </h2>
-                <small class="text-secondary">ACTIVE SKILL SPELLS & KNOWLEDGE</small>
+                <small class="text-secondary">ACTIVE SKILL & KNOWLEDGE</small>
             </div>
 
             <div class="row g-3">
@@ -394,33 +434,22 @@
                             <i class="fa-solid fa-server fa-2x"></i>
                         </div>
                         <div>
-                            <h4 class="font-pixel text-success mb-1" style="font-size: 0.7rem;">RESTFUL API ARCHITECTURE</h4>
-                            <p class="m-0 text-light small">Building robust backend routes and data integrations.</p>
+                            <h4 class="font-pixel text-success mb-1" style="font-size: 0.7rem;">RESTFUL API</h4>
+                            <p class="m-0 text-light small">Building backend routes and data integrations.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="pixel-box d-flex gap-3 align-items-center">
-                        <div class="p-3 bg-black border border-2 border-dark text-danger">
-                            <i class="fa-solid fa-gamepad fa-2x"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-pixel text-danger mb-1" style="font-size: 0.7rem;">WEB AUDIO SYNTHESIS</h4>
-                            <p class="m-0 text-light small">Creating procedural 8-bit sound effects & chiptune loops in JavaScript.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+               
         </section>
 
-        <!-- 4. QUEST LOG / PROJECTS -->
+        <!-- CONTINUE THIS -->
         <section id="projects" class="mb-5">
             <div class="border-bottom border-3 border-dark pb-2 mb-4">
                 <h2 class="font-pixel text-warning m-0" style="font-size: 1rem;">
-                    <i class="fa-solid fa-dungeon text-danger me-2"></i>COMPLETED QUEST LOG
+                    <i class="fa-solid fa-dungeon text-danger me-2"></i>COMPLETED LOG
                 </h2>
-                <small class="text-secondary">FEATURED PROJECTS & DUNGEON RAIDS</small>
+                <small class="text-secondary">FEATURED PROJECTS</small>
             </div>
 
             <div class="row g-4">
@@ -429,7 +458,7 @@
                     <div class="pixel-box h-100 d-flex flex-column justify-content-between">
                         <div>
                             <div class="position-relative mb-3 bg-black border border-2 border-dark overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=500&q=80" class="img-fluid" alt="Quest Project 1">
+                                <img src="C:\Users\Leem\portfolio\portfolio\uncharted.png" class="img-fluid" alt="Quest Project 1">
                                 <span class="position-absolute top-0 end-0 badge-pixel bg-danger text-white m-2">RANK S</span>
                             </div>
                             <h3 class="font-pixel text-warning mb-2" style="font-size: 0.75rem;">RETRO CANVAS ENGINE</h3>
@@ -440,135 +469,50 @@
                         <div>
                             <div class="d-flex gap-1 flex-wrap mb-3">
                                 <span class="badge-pixel bg-dark text-info">JavaScript</span>
-                                <span class="badge-pixel bg-dark text-info">Canvas</span>
-                                <span class="badge-pixel bg-dark text-info">WebAudio</span>
-                            </div>
-                            <div class="d-flex justify-content-between border-top border-dark pt-2 font-pixel" style="font-size: 0.6rem;">
-                                <a href="#" onclick="playSFX('click'); alert('Launching Quest Raid...'); return false;" class="text-success text-decoration-none">
-                                    <i class="fa-solid fa-play"></i> LIVE RAID
-                                </a>
-                                <a href="#" onclick="playSFX('click'); return false;" class="text-secondary text-decoration-none">
-                                    <i class="fa-brands fa-github"></i> REPO
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quest 2 -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="pixel-box h-100 d-flex flex-column justify-content-between">
-                        <div>
-                            <div class="position-relative mb-3 bg-black border border-2 border-dark overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=500&q=80" class="img-fluid" alt="Quest Project 2">
-                                <span class="position-absolute top-0 end-0 badge-pixel bg-warning text-black m-2">RANK A+</span>
-                            </div>
-                            <h3 class="font-pixel text-warning mb-2" style="font-size: 0.75rem;">GUILD STAT DASHBOARD</h3>
-                            <p class="text-light small mb-3">
-                                Full-stack gaming guild portal for tracking raid statistics, member levels, and inventory distribution.
-                            </p>
-                        </div>
-                        <div>
-                            <div class="d-flex gap-1 flex-wrap mb-3">
-                                <span class="badge-pixel bg-dark text-info">React</span>
+                                <span class="badge-pixel bg-dark text-info">Vite</span>
                                 <span class="badge-pixel bg-dark text-info">Bootstrap</span>
-                                <span class="badge-pixel bg-dark text-info">Node</span>
                             </div>
                             <div class="d-flex justify-content-between border-top border-dark pt-2 font-pixel" style="font-size: 0.6rem;">
                                 <a href="#" onclick="playSFX('click'); alert('Launching Quest Raid...'); return false;" class="text-success text-decoration-none">
                                     <i class="fa-solid fa-play"></i> LIVE RAID
                                 </a>
-                                <a href="#" onclick="playSFX('click'); return false;" class="text-secondary text-decoration-none">
+                                <a href="https://github.com/axlmatte/uncharted-website" onclick="playSFX('click'); return false;" class="text-secondary text-decoration-none">
                                     <i class="fa-brands fa-github"></i> REPO
                                 </a>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Quest 3 -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="pixel-box h-100 d-flex flex-column justify-content-between">
-                        <div>
-                            <div class="position-relative mb-3 bg-black border border-2 border-dark overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=500&q=80" class="img-fluid" alt="Quest Project 3">
-                                <span class="position-absolute top-0 end-0 badge-pixel bg-info text-black m-2">RANK A</span>
-                            </div>
-                            <h3 class="font-pixel text-warning mb-2" style="font-size: 0.75rem;">8-BIT SOUNDFX GENERATOR</h3>
-                            <p class="text-light small mb-3">
-                                In-browser synth sound generator producing authentic chiptune jump, shoot, and explosion audio FX.
-                            </p>
-                        </div>
-                        <div>
-                            <div class="d-flex gap-1 flex-wrap mb-3">
-                                <span class="badge-pixel bg-dark text-info">WebAudio</span>
-                                <span class="badge-pixel bg-dark text-info">JS ES6</span>
-                            </div>
-                            <div class="d-flex justify-content-between border-top border-dark pt-2 font-pixel" style="font-size: 0.6rem;">
-                                <a href="#" onclick="playSFX('click'); alert('Launching Quest Raid...'); return false;" class="text-success text-decoration-none">
-                                    <i class="fa-solid fa-play"></i> LIVE RAID
-                                </a>
-                                <a href="#" onclick="playSFX('click'); return false;" class="text-secondary text-decoration-none">
-                                    <i class="fa-brands fa-github"></i> REPO
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                </div>   
         </section>
 
-        <!-- 5. TRANSMIT SIGNAL / CONTACT FORM -->
-        <section id="contact" class="mb-4">
+       
+
+        <!-- CONTACT -->
+        <section id="contact" class="mb-5">
             <div class="border-bottom border-3 border-dark pb-2 mb-4">
                 <h2 class="font-pixel text-warning m-0" style="font-size: 1rem;">
-                    <i class="fa-solid fa-floppy-disk text-success me-2"></i>TRANSMIT SIGNAL / SAVE GAME
+                    <i class="fa-solid fa-floppy-disk text-success me-2"></i>CONTACT
                 </h2>
-                <small class="text-secondary">SEND MESSAGES DIRECTLY TO PLAYER 1</small>
+                <small class="text-secondary">GET IN TOUCH</small>
             </div>
 
-            <div class="row g-4">
-                <div class="col-12 col-lg-5">
-                    <div class="pixel-box h-100">
-                        <h3 class="font-pixel text-warning mb-3" style="font-size: 0.75rem;">SAVE POINT LOCATION</h3>
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <div class="pixel-box text-center">
                         <div class="mb-3">
-                            <span class="font-pixel text-info d-block mb-1" style="font-size: 0.6rem;">GUILD EMAIL</span>
-                            <a href="mailto:alex.dev@arcade.io" class="text-light text-decoration-none fs-5">alex.dev@arcade.io</a>
+                            <span class="font-pixel text-info d-block mb-2" style="font-size: 0.6rem;">EMAIL</span>
+                            <a href="mailto:marceloamam20@gmail.com" onclick="playSFX('click')" class="text-light text-decoration-none fs-4">
+                                marceloamam20@gmail.com
+                            </a>
                         </div>
-                        <div class="mb-3">
-                            <span class="font-pixel text-info d-block mb-1" style="font-size: 0.6rem;">WORLD REALM</span>
-                            <p class="text-light m-0 fs-5">METROPOLIS / REMOTE REALM</p>
+                        <div class="d-flex flex-wrap justify-content-center gap-2">
+                            <a href="https://www.linkedin.com/in/am-m-1450a3207/" target="_blank" rel="noopener noreferrer" onclick="playSFX('click')" class="pixel-btn pixel-btn-green">
+                                <i class="fa-brands fa-linkedin"></i> LINKEDIN
+                            </a>
+                            <a href="mailto:marceloamam20@gmail.com" onclick="playSFX('click')" class="pixel-btn pixel-btn-yellow">
+                                <i class="fa-solid fa-envelope"></i> SEND EMAIL
+                            </a>
                         </div>
-                        <div>
-                            <span class="font-pixel text-info d-block mb-2" style="font-size: 0.6rem;">SOCIAL CHANNELS</span>
-                            <div class="d-flex gap-2">
-                                <a href="#" onclick="playSFX('click'); return false;" class="pixel-btn"><i class="fa-brands fa-github"></i></a>
-                                <a href="#" onclick="playSFX('click'); return false;" class="pixel-btn"><i class="fa-brands fa-linkedin"></i></a>
-                                <a href="#" onclick="playSFX('click'); return false;" class="pixel-btn"><i class="fa-brands fa-x-twitter"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-7">
-                    <div class="pixel-box">
-                        <form onsubmit="handleContactSubmit(event)">
-                            <div class="mb-3">
-                                <label class="font-pixel text-info mb-1" style="font-size: 0.6rem;">PLAYER / RECRUITER NAME</label>
-                                <input type="text" class="form-control pixel-input" placeholder="Enter your name..." required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="font-pixel text-info mb-1" style="font-size: 0.6rem;">GUILD EMAIL</label>
-                                <input type="email" class="form-control pixel-input" placeholder="Enter your email..." required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="font-pixel text-info mb-1" style="font-size: 0.6rem;">TRANSMISSION MESSAGE</label>
-                                <textarea class="form-control pixel-input" rows="4" placeholder="Enter quest details..." required></textarea>
-                            </div>
-                            <button type="submit" class="pixel-btn pixel-btn-green w-100 py-2">
-                                <i class="fa-solid fa-paper-plane"></i> DISPATCH TRANSMISSION
-                            </button>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -579,10 +523,10 @@
     <!-- FOOTER -->
     <footer class="bg-black border-top border-3 border-dark py-4 text-center font-pixel text-secondary" style="font-size: 0.6rem;">
         <p class="text-warning mb-1">*** GAME OVER? NO, CONTINUE! ***</p>
-        <p class="m-0">&copy; 2026 PLAYER 1 PORTFOLIO. BUILT WITH BOOTSTRAP & WEBAUDIO API.</p>
+        <p class="m-0">&copy; 2026 ANA MARCELO PORTFOLIO. BUILT WITH BOOTSTRAP & WEBAUDIO API.</p>
     </footer>
 
-    <!-- LEVEL UP / GAME MODAL -->
+  
     <div class="modal fade" id="gameModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content pixel-box-gold text-center p-3">
@@ -600,14 +544,11 @@
         </div>
     </div>
 
-    <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- JAVASCRIPT: WEBAUDIO API CHIPTUNE SYNTH & GAME LOGIC -->
+
     <script>
-        /* =============================================================
-           1. BUILT-IN WEBAUDIO API CHIPTUNE BGM & SFX ENGINE
-           ============================================================= */
+        
         let audioCtx = null;
         let isMusicPlaying = false;
         let isSFXActive = true;
@@ -655,32 +596,81 @@
         }
 
         function startChiptuneLoop() {
-            if (chiptuneTimer) clearInterval(chiptuneTimer);
+            stopChiptuneLoop();
 
-            // Retro 8-bit NES Square Wave Note Frequencies
-            const notes = [261.63, 329.63, 392.00, 523.25, 293.66, 349.23, 440.00, 587.33];
-            let noteIdx = 0;
+            
+            const bpm = 140;
+            const stepDur = 60 / bpm / 2;                       
+            const midi = m => 440 * Math.pow(2, (m - 69) / 12);
 
+          
+            const lead = [
+                79, 0, 76, 79,  81, 79, 76, 72,   
+                74, 0, 71, 74,  79, 74, 71, 67,   
+                72, 0, 76, 81,  79, 0, 76, 72,    
+                77, 0, 74, 77,  81, 77, 74, 76    
+            ];
+            const roots  = [48, 43, 45, 41];                   
+            const bounce = [0, 12, 0, 12, 0, 12, 7, 12];       
+
+            
+            const noiseBuf = audioCtx.createBuffer(1, Math.floor(audioCtx.sampleRate * 0.05), audioCtx.sampleRate);
+            const nd = noiseBuf.getChannelData(0);
+            for (let i = 0; i < nd.length; i++) nd[i] = Math.random() * 2 - 1;
+
+            function tone(type, freq, t, dur, vol) {
+                const osc = audioCtx.createOscillator();
+                const g = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, t);
+                g.gain.setValueAtTime(0.0001, t);
+                g.gain.exponentialRampToValueAtTime(vol, t + 0.008);
+                g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+                osc.connect(g);
+                g.connect(bgmGain);
+                osc.start(t);
+                osc.stop(t + dur + 0.02);
+            }
+
+            function hat(t, vol) {
+                const src = audioCtx.createBufferSource();
+                const hp = audioCtx.createBiquadFilter();
+                const g = audioCtx.createGain();
+                src.buffer = noiseBuf;
+                hp.type = 'highpass';
+                hp.frequency.value = 7000;
+                g.gain.setValueAtTime(vol, t);
+                g.gain.exponentialRampToValueAtTime(0.0001, t + 0.04);
+                src.connect(hp);
+                hp.connect(g);
+                g.connect(bgmGain);
+                src.start(t);
+            }
+
+            function scheduleStep(step, t) {
+                const bar = Math.floor(step / 8) % 4;
+                const pos = step % 8;
+
+                const l = lead[bar * 8 + pos];
+                if (l) tone('square', midi(l), t, stepDur * 0.85, 0.10);
+
+                tone('triangle', midi(roots[bar] + bounce[pos]), t, stepDur * 0.8, 0.22);
+
+                hat(t, pos % 2 ? 0.05 : 0.025);
+            }
+
+            let step = 0;
+            let nextTime = audioCtx.currentTime + 0.05;
+
+          
             chiptuneTimer = setInterval(() => {
                 if (!isMusicPlaying || !audioCtx) return;
-
-                const osc = audioCtx.createOscillator();
-                const noteGain = audioCtx.createGain();
-
-                osc.type = 'square';
-                osc.frequency.setValueAtTime(notes[noteIdx % notes.length], audioCtx.currentTime);
-
-                noteGain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-                noteGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.18);
-
-                osc.connect(noteGain);
-                noteGain.connect(bgmGain);
-
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.2);
-
-                noteIdx++;
-            }, 230);
+                while (nextTime < audioCtx.currentTime + 0.15) {
+                    scheduleStep(step, nextTime);
+                    nextTime += stepDur;
+                    step++;
+                }
+            }, 25);
         }
 
         function stopChiptuneLoop() {
@@ -745,9 +735,40 @@
             }
         }
 
-        /* =============================================================
-           2. GAME MECHANICS & INTERACTION
-           ============================================================= */
+       
+        (function setupAvatarSwap() {
+            const swap = document.getElementById('avatarSwap');
+            const alt = document.getElementById('avatarAlt');
+            if (!swap) return;
+
+            const fallbackSVG = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" shape-rendering="crispEdges">' +
+                '<rect width="16" height="16" fill="#1b2a49"/>' +
+                '<rect x="4" y="2" width="8" height="2" fill="#f4b41b"/>' +
+                '<rect x="3" y="4" width="10" height="2" fill="#f4b41b"/>' +
+                '<rect x="4" y="6" width="8" height="5" fill="#f2c8a0"/>' +
+                '<rect x="5" y="7" width="2" height="2" fill="#000"/>' +
+                '<rect x="9" y="7" width="2" height="2" fill="#000"/>' +
+                '<rect x="6" y="10" width="4" height="1" fill="#a33"/>' +
+                '<rect x="3" y="11" width="10" height="5" fill="#00e5ff"/>' +
+                '</svg>'
+            );
+            alt.addEventListener('error', function () {
+                if (alt.src !== fallbackSVG) alt.src = fallbackSVG;
+            });
+
+          
+            swap.addEventListener('mouseenter', () => playSFX('click'));
+
+         
+            swap.addEventListener('touchstart', function (e) {
+                e.preventDefault();
+                swap.classList.toggle('swapped');
+                playSFX('click');
+            }, { passive: false });
+        })();
+
+        
         let level = 99;
         let exp = 8500;
 
